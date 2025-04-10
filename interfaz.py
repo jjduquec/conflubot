@@ -1,53 +1,40 @@
-import streamlit as st 
-import random
+import streamlit as st  
 
-st.title("Conflubot")
-
-bot_responses=[
-    "Im an old man",
-    "Where do you live?",
-    "What do you want?",
-    "Can you just stop?"
-]
-
-def get_resposne():
-    i=random.randint(0,len(bot_responses)-1)
-    return bot_responses[i]
-
-#create chat history
+#creating chat history  
 if "messages" not in st.session_state:
     st.session_state.messages=[]
+    
+    #initialize chatbot  
+    st.session_state.messages.append({"role":"assistant","content":"Hi, How can i help?"})
 
-#display messages  
+def save_message(role,content):
+    st.session_state.messages.append({"role":role,"content":content})
+
+def display_message(role,message): 
+    with st.chat_message(role):
+        st.markdown(message)
+
+#----------- Display zone ----------------------------------------------------
+
+#display chat history  
 for message in st.session_state.messages: 
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+    display_message(message["role"],message["content"])
 
+#display user input messages  
 
+user_message = st.chat_input("Ask something")
 
+if user_message:  
+    #display message after user input  
+    display_message('user',user_message)
+    save_message("user",user_message) 
 
+    #displaying chatbot message 
+    #chatbot_message= f"Conflubot: {user_message}"
 
+    display_message('assistant',user_message)
 
-#initialize chat 
-with st.chat_message("assistant"): 
-    st.session_state.messages.append({"role":"assistant","content":"Hi, how can i help?"})
-    st.markdown("Hi, how can i help?")
-
-if prompt :=st.chat_input("Ask something"):
-    st.chat_message("user").markdown(prompt)
-    #saving user message
-    st.session_state.messages.append({"role":"user","content":prompt})
+    save_message("assistant",user_message)
 
     
-    # Add here functions to gen bot response
-    
-    bot_response=get_resposne()
-    response = f"Conflubot:{bot_response}"
-
-#    with st.chat_message("assistant"): 
-#        st.markdown(response)
-    
-    #saving assistant messages
-    st.session_state.messages.append({"role":"assistant","content":response})
-
 
