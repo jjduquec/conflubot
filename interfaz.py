@@ -1,4 +1,5 @@
 import streamlit as st  
+from controlador import get_answer
 
 #creating chat history  
 if "messages" not in st.session_state:
@@ -33,11 +34,11 @@ if user_message:
     save_message("user",user_message) 
 
     #displaying chatbot message 
-    #chatbot_message= f"Conflubot: {user_message}"
+    chatbot_message= get_answer()
 
-    display_message('assistant',user_message)
+    display_message('assistant',chatbot_message)
 
-    save_message("assistant",user_message)
+    save_message("assistant",chatbot_message)
 
     
 
