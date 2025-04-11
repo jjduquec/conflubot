@@ -16,6 +16,9 @@ def display_message(role,message):
 
 #----------- Display zone ----------------------------------------------------
 
+
+
+
 #display chat history  
 for message in st.session_state.messages: 
     display_message(message["role"],message["content"])
