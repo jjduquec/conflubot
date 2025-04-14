@@ -1,0 +1,1 @@
+Jira is a project management and issue tracking tool developed by Atlassian. It's commonly used by software development teams to plan, track, and manage work. Jira helps teams organize tasks, bugs, and projects in a structured way, and it supports Agile methodologies like Scrum and Kanban.

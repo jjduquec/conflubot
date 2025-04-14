@@ -34,7 +34,7 @@ if user_message:
     save_message("user",user_message) 
 
     #displaying chatbot message 
-    chatbot_message= get_answer()
+    chatbot_message= get_answer(user_message)
 
     display_message('assistant',chatbot_message)
 
