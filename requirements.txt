@@ -3,3 +3,8 @@ python-dotenv==1.1.0
 huggingface-hub==0.30.2
 requests  
 beautifulsoup4==4.13.4
+chromadb
+llama-index
+llama-index-core
+llama-index-embeddings-huggingface
+llama-index-vector-stores-chroma
