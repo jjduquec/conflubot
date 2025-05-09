@@ -1,38 +1,19 @@
-from dotenv import load_dotenv
-import os  
-from huggingface_hub import InferenceClient
+import re
+from ingestion import get_repository
 
-#loading environment  
-load_dotenv(dotenv_path=".env")
-api_key=os.getenv("HF_KEY")
-
+pattern = r"confluence\.atlassian\.com/[a-z0-9\-]+/[a-z0-9\-]+-\d+\.html"
 
 
 #getting chatbot answer  
-def get_answer(question):
-    
-    #getting Inference Client 
-    client=InferenceClient(
-    provider="hf-inference",
-    api_key=api_key,
+def get_answer(query):
 
+    #check if exist confluence link 
+    if re.search(pattern,query) !=None:  
+        link='https://'+(re.findall(pattern,query)[0])
+        message=get_repository(link)
+        return message
 
-    )
-
-    file=open("context.txt",'r')
-    context=file.read()
-    file.close()
-    answer=client.question_answering(
-        question=question,
-        context=context,
-        model="distilbert/distilbert-base-cased-distilled-squad"
-
-
-    )
-
-    return answer['answer']
+   
+        
 
     
-
-
-
