@@ -1,5 +1,5 @@
 import streamlit as st  
-from controlador_interfaz import get_answer
+from controlador import get_answer
 
 #creating chat history  
 if "messages" not in st.session_state:
