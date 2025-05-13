@@ -17,18 +17,17 @@ def get_answer(query,context):
 def get_context(query): 
     client = chromadb.PersistentClient("./db")
     collection=client.get_collection("dev")
-    print(collection)
     vectore_store=ChromaVectorStore(chroma_collection=collection) 
     index=VectorStoreIndex.from_vector_store(
     vector_store=vectore_store,
     embed_model=embed_model
     )
-    retriever=index.as_retriever()
-    print(retriever)
+    retriever=index.as_retriever(
+        similarity_top_k=1
+    )
     nodes=retriever.retrieve(query)
-    context=""
-    for node in nodes:  
-        context+="\n"+node.text 
+    context=nodes[0].get_text()
+    
     return context
 
 
