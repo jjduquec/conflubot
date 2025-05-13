@@ -5,7 +5,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.vector_stores.chroma import ChromaVectorStore
 
 #model for embedding
-embed_model=HuggingFaceEmbedding(model_name='./all-MiniLM-L6-v2')
+embed_model=HuggingFaceEmbedding(model_name='./models/all-MiniLM-L6-v2')
 qa_model="./distilbert-base-cased-distilled-squad"
 
 def get_answer(query,context):  
@@ -16,7 +16,7 @@ def get_answer(query,context):
 
 def get_context(query): 
     client = chromadb.PersistentClient("./db")
-    collection=client.get_or_create_collection("dev")
+    collection=client.get_collection("dev")
     print(collection)
     vectore_store=ChromaVectorStore(chroma_collection=collection) 
     index=VectorStoreIndex.from_vector_store(
