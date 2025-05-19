@@ -9,7 +9,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 
 
-embed_model=HuggingFaceEmbedding(model_name='./models/all-MiniLM-L6-v2')
+embed_model=HuggingFaceEmbedding(model_name='./all-MiniLM-L6-v2')
 
 
 
