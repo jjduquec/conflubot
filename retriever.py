@@ -1,18 +1,26 @@
 import chromadb 
-from transformers import pipeline
+from ollama import chat, ChatResponse
 from llama_index.core import VectorStoreIndex
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.vector_stores.chroma import ChromaVectorStore
 
 #model for embedding
-embed_model=HuggingFaceEmbedding(model_name='./models/all-MiniLM-L6-v2')
-qa_model="./distilbert-base-cased-distilled-squad"
+embed_model=HuggingFaceEmbedding(model_name='./all-MiniLM-L6-v2')
 
-def get_answer(query,context):  
-    qa_engine=pipeline('question-answering',model=qa_model,tokenizer=qa_model)
-    answer=qa_engine(context=context,question=query)
-    answer=answer['answer']
-    return answer
+
+def get_answer(query,context): 
+    prompt=f"""
+    you are an ai assistant to search information in confluence repositories\
+    based on the next context : {context} \
+    answer the next question : {query}\
+    if you dont know the answer , just return as an answer : i dont know\
+    """
+    response: ChatResponse= chat(model='llama3.2',messages=[{
+    'role':'user',
+    'content': prompt,
+    }])
+ 
+    return response['message']['content']
 
 def get_context(query): 
     client = chromadb.PersistentClient("./db")
@@ -26,12 +34,18 @@ def get_context(query):
         similarity_top_k=1
     )
     nodes=retriever.retrieve(query)
-    context=nodes[0].get_text()
+    context=""
+    if len(nodes)>0:
+        context=nodes[0].get_text()
+    
     
     return context
 
 
 def  ask_question(question):
     context=get_context(question)
-    answer=get_answer(question,context)
+    if context=="":
+        answer="sorry, i couldnt find information about"
+    else:
+        answer=get_answer(question,context)
     return answer
