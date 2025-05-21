@@ -1,6 +1,9 @@
+import os 
+import torch
 import streamlit as st  
 from controlador import get_answer
 
+torch.classes.__path__=[]
 #creating chat history  
 if "messages" not in st.session_state:
     st.session_state.messages=[]
