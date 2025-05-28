@@ -1,5 +1,5 @@
 import chromadb 
-from ollama import chat, ChatResponse
+from ollama import Client
 from llama_index.core import VectorStoreIndex
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.vector_stores.chroma import ChromaVectorStore
@@ -9,13 +9,14 @@ embed_model=HuggingFaceEmbedding(model_name='./all-MiniLM-L6-v2')
 
 
 def get_answer(query,context): 
+    client=Client(host='http://localhost:11434')
     prompt=f"""
     you are an ai assistant to search information in confluence repositories\
     based on the next context : {context} \
     answer the next question : {query}\
     if you dont know the answer , just return as an answer : i dont know\
     """
-    response: ChatResponse= chat(model='llama3.2',messages=[{
+    response=client.chat(model='qwen2:1.5b',messages=[{
     'role':'user',
     'content': prompt,
     }])
