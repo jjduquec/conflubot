@@ -1,0 +1,7 @@
+beautifulsoup4==4.13.4
+flask
+chromadb
+llama-index
+llama-index-core
+llama-index-embeddings-huggingface
+llama-index-vector-stores-chroma
