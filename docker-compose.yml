@@ -9,7 +9,7 @@ services:
   
 
   conflubot_ingestion:
-    build: .
+    build: ./ingestion/
     container_name: conflubot_ingestion
     ports:
       - "8081:8081"
