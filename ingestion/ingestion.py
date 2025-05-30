@@ -15,7 +15,7 @@ embed_model=HuggingFaceEmbedding(model_name='./conflubot_model')
 
 def save_content(documents):
     #prepare DB 
-    db=chromadb.HttpClient(host='localhost',port=8000)
+    db=chromadb.HttpClient(host='db',port=8000)
     collection=db.get_or_create_collection("dev")
     vector_store=ChromaVectorStore(chroma_collection=collection)
     storage_context=StorageContext.from_defaults(vector_store=vector_store)
