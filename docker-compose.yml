@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    image: chromadb/chroma
+    container_name: db
+    ports:
+      - "8000:8000"
+
+  
+
+  conflubot_ingestion:
+    build: .
+    container_name: conflubot_ingestion
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
