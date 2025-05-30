@@ -9,7 +9,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 
 
-embed_model=HuggingFaceEmbedding(model_name='./all-MiniLM-L6-v2')
+embed_model=HuggingFaceEmbedding(model_name='./conflubot_model')
 
 
 
@@ -82,4 +82,3 @@ def get_repository(url):
     
 
 
-print(get_repository('https://confluence.atlassian.com/jirasoftwareserver/getting-started-as-a-jira-software-user-938845161.html'))
