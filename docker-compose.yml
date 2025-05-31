@@ -5,6 +5,11 @@ services:
     container_name: db
     ports:
       - "8000:8000"
+  ollama:
+    image: ollama/ollama
+    container_name: llm
+    ports:
+      - 11434:11434
 
   
 
@@ -15,3 +20,15 @@ services:
       - "8081:8081"
     depends_on:
       - db
+
+  conflubot_retriever: 
+    build: ./retriever/
+    container_name: conflubot_retriever
+    ports: 
+      - "8082:8082"
+    depends_on:
+      - db
+      - ollama 
+
+
+      

@@ -9,7 +9,7 @@ embed_model=HuggingFaceEmbedding(model_name='./conflubot_model')
 
 
 def get_answer(query,context): 
-    client=Client(host='http://localhost:11434')
+    client=Client(host='http://llm:11434')
     prompt=f"""
     you are an ai assistant to search information in confluence repositories\
     based on the next context : {context} \

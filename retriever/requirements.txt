@@ -5,3 +5,4 @@ llama-index-core
 llama-index-embeddings-huggingface
 llama-index-vector-stores-chroma
 ollama
+huggingface-hub==0.30.2
