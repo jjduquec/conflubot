@@ -29,6 +29,16 @@ services:
     depends_on:
       - db
       - ollama 
+  conflubot_interface: 
+    build: ./front-end/
+    container_name: conflubot_interface
+    ports:
+      - "8080:8501"
+    depends_on: 
+      - conflubot_ingestion
+      - conflubot_retriever
+
+      
 
 
       

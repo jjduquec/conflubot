@@ -3,3 +3,5 @@ primaryColor="#0052cc"
 backgroundColor="#172b4d"
 secondaryBackgroundColor="#2684ff"
 textColor="#f4f5f7"
+[server]
+port=8080

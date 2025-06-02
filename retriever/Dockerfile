@@ -1,5 +1,5 @@
 FROM python:3.12.10  
-WORKDIR /usr/local/conflubot_ingestion
+WORKDIR /usr/local/conflubot_retriever
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt 

@@ -25,7 +25,7 @@ def get_answer(query,context):
 
 def get_context(query): 
     client =chromadb.HttpClient(host='db',port=8000)
-    collection=client.get_collection("dev")
+    collection=client.get_collection("prod")
     vectore_store=ChromaVectorStore(chroma_collection=collection) 
     index=VectorStoreIndex.from_vector_store(
     vector_store=vectore_store,
