@@ -1,0 +1,33 @@
+# Conflubot
+
+## Description
+Conflubot is a chatbot for retrieve information from confluence repositories like this :  
+https://confluence.atlassian.com/jirasoftwareserver/getting-started-as-a-jira-software-user-938845161.html
+
+For now, conflubot works only retrieving information from jira documentation deployed in confluence
+
+## Components
+- Retriever
+- Ingestion
+- Chromadb container 
+- Ollama container (using the model qwen2:1.5b)
+- Streamlit  
+
+
+All of this components has a docker image for deployment
+This chatbot use the next embbed model : 
+https://huggingface.co/jjduquec/conflubot_embed_model
+this model is based on : sentence-transformers/all-MiniLM-L6V2 
+## Installation
+Must have docker 
+on a CMD/ bash  inside of conflubot project
+you can run : 
+docker-compose up -d  
+then conflubot will start to work  
+
+WARNING! : 
+Once conflubot is running , it's required to run next command :  
+docker exec -it llm ollama pull qwen2:1.5b 
+
+otherwise , the retriever component will trigger errors  
+
