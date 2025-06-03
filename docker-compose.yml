@@ -33,7 +33,7 @@ services:
     build: ./front-end/
     container_name: conflubot_interface
     ports:
-      - "8080:8501"
+      - "8080:8080"
     depends_on: 
       - conflubot_ingestion
       - conflubot_retriever
