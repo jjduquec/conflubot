@@ -9,6 +9,7 @@ if "messages" not in st.session_state:
     
     #initialize chatbot  
     st.session_state.messages.append({"role":"assistant","content":"Hi, How can i help?"})
+    
 
 def save_message(role,content):
     st.session_state.messages.append({"role":role,"content":content})
@@ -20,7 +21,7 @@ def display_message(role,message):
 #----------- Display zone ----------------------------------------------------
 
 
-
+st.header("Conflubot",divider="blue")
 
 #display chat history  
 for message in st.session_state.messages: 
