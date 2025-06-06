@@ -35,9 +35,9 @@ if user_message:
     #display message after user input  
     display_message('user',user_message)
     save_message("user",user_message) 
-
-    #displaying chatbot message 
-    chatbot_message= get_answer(user_message)
+    with st.status("processing"):
+        #displaying chatbot message 
+        chatbot_message= get_answer(user_message)
 
     display_message('assistant',chatbot_message)
 
