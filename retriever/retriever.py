@@ -11,10 +11,11 @@ embed_model=HuggingFaceEmbedding(model_name='./conflubot_model')
 def get_answer(query,context): 
     client=Client(host='http://llm:11434')
     prompt=f"""
-    you are an ai assistant to search information in confluence repositories\
+    you are an ai assistant to search information \
     based on the next context : {context} \
     answer the next question : {query}\
-    if you dont know the answer , just return as an answer : sorry, i dont have information about it\
+    if you can not answer the question, just say : sorry, i dont have enough information about \
+    remember, just say : sorry, i dont have enough information about
     """
     response=client.chat(model='qwen2:1.5b',messages=[{
     'role':'user',
@@ -24,21 +25,26 @@ def get_answer(query,context):
     return response['message']['content']
 
 def get_context(query): 
-    client =chromadb.HttpClient(host='db',port=8000)
-    collection=client.get_collection("prod")
-    vectore_store=ChromaVectorStore(chroma_collection=collection) 
-    index=VectorStoreIndex.from_vector_store(
-    vector_store=vectore_store,
-    embed_model=embed_model
-    )
-    retriever=index.as_retriever(
-        similarity_top_k=1
-    )
-    nodes=retriever.retrieve(query)
-    context=""
-    if len(nodes)>0:
-        context=nodes[0].get_text()
     
+    try:
+        client =chromadb.HttpClient(host='db',port=8000)
+        collection=client.get_collection("prod")
+        vectore_store=ChromaVectorStore(chroma_collection=collection) 
+        index=VectorStoreIndex.from_vector_store(
+        vector_store=vectore_store,
+        embed_model=embed_model
+        )
+        retriever=index.as_retriever(
+            similarity_top_k=1
+        )
+        nodes=retriever.retrieve(query)
+        context=""    
+        if len(nodes)>0:
+            for node in nodes:
+                context+=node.get_text()
+    except:  
+        context=""
+        
     
     return context
 

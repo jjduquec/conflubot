@@ -10,10 +10,7 @@ services:
     container_name: llm
     ports:
       - 11434:11434
-
-  
-
-  conflubot_ingestion:
+  ingestion:
     build: ./ingestion/
     container_name: conflubot_ingestion
     ports:
@@ -21,7 +18,7 @@ services:
     depends_on:
       - db
 
-  conflubot_retriever: 
+  retriever: 
     build: ./retriever/
     container_name: conflubot_retriever
     ports: 
@@ -29,14 +26,14 @@ services:
     depends_on:
       - db
       - ollama 
-  conflubot_interface: 
+  interface: 
     build: ./front-end/
     container_name: conflubot_interface
     ports:
       - "8080:8080"
     depends_on: 
-      - conflubot_ingestion
-      - conflubot_retriever
+      - ingestion
+      - retriever
 
       
 
