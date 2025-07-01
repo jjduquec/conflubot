@@ -33,7 +33,7 @@ def get_context(query):
     embed_model=embed_model
     )
     retriever=index.as_retriever(
-        similarity_top_k=10
+        similarity_top_k=5
     )
     nodes=retriever.retrieve(query)
     context=""
