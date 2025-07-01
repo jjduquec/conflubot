@@ -11,10 +11,11 @@ embed_model=HuggingFaceEmbedding(model_name='./conflubot_model')
 def get_answer(query,context): 
     client=Client(host='http://llm:11434')
     prompt=f"""
-    you are an ai assistant to search information in confluence repositories\
+    you are an ai assistant to search information \
     based on the next context : {context} \
     answer the next question : {query}\
-    if you dont know the answer , just return as an answer : sorry, i dont have information about it\
+    if you can not answer the question, just say : sorry, i dont have enough information about \
+    remember, just say : sorry, i dont have enough information about
     """
     response=client.chat(model='qwen2:1.5b',messages=[{
     'role':'user',
