@@ -1,6 +1,6 @@
 import re
 import requests  as r
-import asyncio
+
 pattern = r"confluence\.atlassian\.com/[a-z0-9\-]+/[a-z0-9\-]+-\d+\.html"
 
 
