@@ -8,7 +8,7 @@ if "messages" not in st.session_state:
     st.session_state.messages=[]
     
     #initialize chatbot  
-    st.session_state.messages.append({"role":"assistant","content":"Hi, How can i help?"})
+    st.session_state.messages.append({"role":"assistant","content":"Hi, How can i help you?"})
     
 
 def save_message(role,content):
